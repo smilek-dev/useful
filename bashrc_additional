@@ -1,0 +1,16 @@
+# Make sure to add the following to the .bashrc file
+# if [ -f ~/.bashrc_additional ]; then
+#     . ~/.bashrc_additional
+# fi
+
+# Display git branch name in command line prompt
+parse_git_branch() {
+  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+
+# Command line prompt is going to be: [path-to-current-directory](master)$
+PS1="$PS1\$(parse_git_branch)$ "
+
+# Quick history search
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
